@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tic-Tac-Toe: Mind Duel</title>
+  <style>
+   * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      overflow: hidden; /* Disable scroll on intro */
+    }
+    body {
+      font-family: 'simple serenity';
+      background: linear-gradient(to right, #ece9e6, #ffffff);
+    }
+    .screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      padding: 20px;
+    }
+    .intro-screen {
+      display: flex;
+      background: url('1.png') no-repeat center center/cover;
+    }
+    .mode-screen, .level-screen {
+      background: url('4.png') no-repeat center center/cover;
+    }
+    h1 {
+      font-family: 'simple serenity';
+      font-size: 130px;
+      margin-bottom: 40px;
+      position: relative;
+      animation: slideLeft 1.5s ease-out forwards;
+      opacity: 0;
+    }
+    @keyframes slideLeft {
+      0% { left: -100px; opacity: 0; }
+      100% { left: 0; opacity: 1; }
+    }
+    p {
+      font-size: 1.2em;
+      color: #333;
+      margin-bottom: 30px;
+    }
+    button {
+      padding: 12px 30px;
+      font-size: 1em;
+      background: linear-gradient(to right, #4493e6, #e98af2);
+      color: rgb(239, 237, 237);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s;
+    }
+    button:hover {
+     
+      color: #e8e6e6;
+    }
+    h2 { font-size: 60px; }
+    .game-screen {
+      display: none;
+      text-align: center;
+      width: 100%;
+      height: 100vh;
+      margin: auto;
+      padding: 20px;
+     
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    #status {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      color: #313131;
+       
+    }
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+      max-width: 500px;
+      margin: auto;
+    }
+    .cell {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      font-size: 80px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.5s;
+      border: 2px solid #ccc;
+    }
+
+                                                                                                          
+
+
+    .cell:hover { background-color: #bbb8b8; }
+    .highlight { background:linear-gradient(to bottom, #b1def5, #eaa8cf) !important; }
+    .score-board {
+      margin-bottom: 15px;
+      font-size: 1.1em;
+      color: #313030;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: none;
+      border: none;
+      font-size: 1.8em;
+      color: #003366;
+      cursor: pointer;
+    }
+    @media (max-width: 500px) {
+      h1 { font-size: 80px; }
+      h2 {
+        font-size: 40px;
+        margin-bottom: 30px;
+      }
+       .mode-screen, .level-screen{
+        background-position: center;
+       }
+      .cell { font-size: 1.5em; }
+    }
+  </style>
+</head>
+<body>
+         <div class="screen intro-screen" id="introScreen">
+    
+    <h1 >Tic
+   Tac
+   Toe</h1>
+    <p>Challenge your brain in this classic game of strategy!</p>
+    <button  onclick="goToModeScreen()">Start Game</button>
+  </div>
+
+  <div class="screen mode-screen" id="modeScreen">
+    <button class="back-button" onclick="goBackToIntro()">←</button>
+    <h2>Select Theme</h2>
+    <div class="theme-switcher">
+      <button style="background-image: url('5.png');"  onclick="setStyle('classic')">Classic</button>
+      <button  style="background-image: url('6.png');" onclick="setStyle('minimal')">Minimal</button>
+      <button  style="background-image: url('7.png');" onclick="setStyle('neon')">Neon</button>
+    </div>
+  </div>
+
+  <div class="screen level-screen" id="levelScreen">
+    <button class="back-button" onclick="goBackToMode()">←</button>
+    <h2>Select Game Mode</h2>
+    <button  style="background: linear-gradient(to bottom, #570831, #8f5a75) ;" onclick="startGame('friend')">Play with Friend</button>
+    <button style="background:linear-gradient(to bottom, #570831, #8f5a75) ;"  onclick="startGame('ai')">Play with AI</button>
+  </div>
+
+  <div class="screen game-screen" id="gameScreen">
+    <button class="back-button" id="goback" onclick="goBackToLevel()">←</button>
+    <h2 id="head" >Tic-Tac-Toe</h2>
+    <div  id="score-board" style="text-align: center; ">
+      X Wins: <span id="xScore">0</span> | O Wins: <span id="oScore">0</span> | Draws: <span id="draws">0</span>
+    </div>
+    <div id="status" style="color: #333; font-family: 'simple serenity'; font-weight: bold;">X's Turn</div>
+    <div class="board" id="board">
+      <div class="cell" data-index="0"></div>
+      <div class="cell" data-index="1"></div>
+      <div class="cell" data-index="2"></div>
+      <div class="cell" data-index="3"></div>
+      <div class="cell" data-index="4"></div>
+      <div class="cell" data-index="5"></div>
+      <div class="cell" data-index="6"></div>
+      <div class="cell" data-index="7"></div>
+      <div class="cell" data-index="8"></div>
+    </div>
+    <button id="resetbutton" onclick="resetGame()">Reset Game</button>
+  </div>
+
+  <audio id="clickSound" src="https://www.soundjay.com/button/sounds/button-16.mp3"></audio>
+  <audio id="winSound" src="https://www.soundjay.com/button/sounds/button-10.mp3"></audio>
+
+  <script>
+    let selectedStyle = "classic";
+    
+    let aiEnabled = false;
+    let currentPlayer = "X";
+    let gameActive = true;
+    let board = ["", "", "", "", "", "", "", "", ""];
+    let xWins = 0, oWins = 0, draws = 0;
+
+    const introScreen = document.getElementById("introScreen");
+    const modeScreen = document.getElementById("modeScreen");
+    const levelScreen = document.getElementById("levelScreen");
+    const gameScreen = document.getElementById("gameScreen");
+    const statusText = document.getElementById("status");
+    const boardDiv = document.getElementById("board");
+    const cells = document.querySelectorAll(".cell");
+    const xScore = document.getElementById("xScore");
+    const oScore = document.getElementById("oScore");
+    const drawScore = document.getElementById("draws");
+    const clickSound = document.getElementById("clickSound");
+    const winSound = document.getElementById("winSound");
+    const reset = document.getElementById("resetbutton");
+ const heading = document.getElementById("head");
+ const scrore = document.getElementById("score-board");
+  const goback = document.getElementById("goback");
+
+    const winCombos = [
+      [0,1,2], [3,4,5], [6,7,8],
+      [0,3,6], [1,4,7], [2,5,8],
+      [0,4,8], [2,4,6]
+    ];
+
+    function goToModeScreen() {
+      introScreen.style.display = "none";
+      modeScreen.style.display = "flex";
+    }
+    function goBackToIntro() {
+      modeScreen.style.display = "none";
+      introScreen.style.display = "flex";
+    }
+    function goBackToMode() {
+      levelScreen.style.display = "none";
+      modeScreen.style.display = "flex";
+    }
+    function goBackToLevel() {
+      gameScreen.style.display = "none";
+      levelScreen.style.display = "flex";
+    }
+
+    function setStyle(style) {
+      selectedStyle = style;
+      modeScreen.style.display = "none";
+      levelScreen.style.display = "flex";
+    }
+
+    function startGame(mode) {
+      aiEnabled = (mode === 'ai');
+      levelScreen.style.display = "none";
+      gameScreen.style.display = "block";
+      resetGame();
+      applyStyle();
+    }
+
+    function applyStyle() {
+      if (selectedStyle === 'neon') {
+        gameScreen.style.backgroundImage = "url('7.png')";
+gameScreen.style.backgroundSize = "cover";
+gameScreen.style.backgroundPosition = "center";
+goback.style.color = " ";
+        document.querySelectorAll(".cell").forEach(cell => {
+    
+           reset.style.background = " linear-gradient(to bottom, #180636, #280636) ";
+           heading.style.color = "#2c2d36";
+               heading.style.textAlign = "center ";
+        });
+
+      }
+       else if (selectedStyle === 'minimal') {
+        gameScreen.style.backgroundImage = "url('6.png')";
+gameScreen.style.backgroundSize = "cover";
+gameScreen.style.backgroundPosition = "center";
+ boardDiv.style.background = "#083f4a";
+      goback.style.backgroundColor = "#0b778c";   
+  document.querySelectorAll(".cell").forEach(cell => {
+    cell.style.color = "#0993b3";
+    reset.style.background = " linear-gradient(to right, #062930, #0c819c) ";      
+     heading.style.color = "#092a3b";
+               heading.style.textAlign = "center ";
+
+  });
+}
+
+      else {
+        gameScreen.style.backgroundImage = "url('5.png')";
+gameScreen.style.backgroundSize = "cover";
+gameScreen.style.backgroundPosition = "center";
+        scrore.style.color = "#f2f7f7";
+          goback.style.backgroundColor = "#f2f7f7";
+        document.querySelectorAll(".cell").forEach(cell => {
+          cell.style.color = " #f2f7f7";
+          heading.style.color = "#f2f6f7";
+               heading.style.textAlign = "center ";
+               statusText.style.color = "#f2f6f7";
+           reset.style.background = " linear-gradient(to right, #12131f, #343540) ";   
+        });
+      }
+    }
+
+    function handleClick(e) {
+      const idx = e.target.dataset.index;
+      if (!gameActive || board[idx]) return;
+      board[idx] = currentPlayer;
+      e.target.textContent = currentPlayer;
+      clickSound.play();
+      checkWinner();
+      if (aiEnabled && gameActive && currentPlayer === "O") {
+        setTimeout(aiMove, 500);
+      }
+    }
+
+    function aiMove() {
+      const available = board.map((v, i) => v === "" ? i : null).filter(v => v !== null);
+      const move = available[Math.floor(Math.random() * available.length)];
+      board[move] = currentPlayer;
+      cells[move].textContent = currentPlayer;
+      clickSound.play();
+      checkWinner();
+    }
+
+    function checkWinner() {
+      for (let combo of winCombos) {
+        const [a,b,c] = combo;
+        if (board[a] && board[a] === board[b] && board[b] === board[c]) {
+          [cells[a], cells[b], cells[c]].forEach(cell => cell.classList.add("highlight"));
+          winSound.play();
+          statusText.textContent = `${currentPlayer} Wins! 🎉`;
+          if (currentPlayer === "X") xWins++; else oWins++;
+          updateScore();
+          gameActive = false;
+          return;
+        }
+      }
+      if (!board.includes("")) {
+        statusText.textContent = "It's a Draw! 🤝";
+        draws++;
+        updateScore();
+        gameActive = false;
+        return;
+      }
+      currentPlayer = currentPlayer === "X" ? "O" : "X";
+      statusText.textContent = `${currentPlayer}'s Turn`;
+    }
+
+    function updateScore() {
+      xScore.textContent = xWins;
+      oScore.textContent = oWins;
+      drawScore.textContent = draws;
+    }
+
+    function resetGame() {
+      board.fill("");
+      currentPlayer = "X";
+      gameActive = true;
+      cells.forEach(cell => {
+        cell.textContent = "";
+        cell.classList.remove("highlight");
+      });
+      statusText.textContent = `${currentPlayer}'s Turn`;
+    }
+
+    cells.forEach(cell => cell.addEventListener("click", handleClick));
+  </script>
+</body>
+</html>
