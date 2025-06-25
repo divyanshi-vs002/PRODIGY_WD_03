@@ -132,6 +132,13 @@
         font-size: 40px;
         margin-bottom: 30px;
       }
+      .scoreboard{
+        padding: 50px;
+      }
+      
+      #status{
+        padding-bottom: 40px;
+      }
        .mode-screen, .level-screen{
         background-position: center;
        }
@@ -169,7 +176,7 @@
   <div class="screen game-screen" id="gameScreen">
     <button class="back-button" id="goback" onclick="goBackToLevel()">←</button>
     <h2 id="head" >Tic-Tac-Toe</h2>
-    <div  id="score-board" style="text-align: center; ">
+    <div  class="scoreboard" id="score-board" style="text-align: center; ">
       X Wins: <span id="xScore">0</span> | O Wins: <span id="oScore">0</span> | Draws: <span id="draws">0</span>
     </div>
     <div id="status" style="color: #333; font-family: 'simple serenity'; font-weight: bold;">X's Turn</div>
