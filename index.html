@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <canvas class="space-canvas" id="spaceCanvas" aria-hidden="true"></canvas>
+
+    <div class="aurora-field" aria-hidden="true"></div>
+
+    <nav class="navbar" aria-label="Primary navigation">
+      <a class="brand" href="#home" aria-label="Portfolio home">
+        <span class="brand-mark">D</span>
+        <span>Divyashi Singh</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#skills">Skills</a>
+        <a href="#journey">Journey</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <a class="nav-action magnetic" href="#contact">Hire Me</a>
+    </nav>
+
+    <main>
+      <!-- Hero header: text on the left, animated 3D visual on the right. -->
+      <section class="hero section-3d" id="home">
+        <div class="hero-copy reveal">
+          <div class="profile-header" aria-label="Portfolio owner">
+            <span class="profile-avatar">D</span>
+            <div>
+              <span class="profile-label"></span>
+              <strong>Divyashi Singh</strong>
+            </div>
+          </div>
+          <p class="eyebrow">Frontend Developer • UI Designer</p>
+          <h2>Crafting modern websites with immersive UI.</h2>
+          <p class="hero-text">
+            Passionate frontend developer focused on creating responsive,
+            interactive, and visually stunning websites using HTML, CSS,
+            JavaScript, React, and modern UI animations.
+          </p>
+
+          <div class="hero-actions">
+            <a class="primary-btn magnetic" href="#work">View Projects</a>
+            <a class="secondary-btn magnetic" href="#contact">Contact Panel</a>
+          </div>
+        </div>
+
+        <div
+          class="hero-visual parallax-card"
+          id="heroVisual"
+          data-depth="0.22"
+        >
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="holo-core" aria-hidden="true">
+            <span class="holo-ring ring-a"></span>
+            <span class="holo-ring ring-b"></span>
+            <span class="holo-ring ring-c"></span>
+            <span class="holo-disc"></span>
+            <span class="holo-chip chip-one">UI</span>
+            <span class="holo-chip chip-two">UX</span>
+            <span class="holo-chip chip-three">JS</span>
+          </div>
+          <div class="glass-panel panel-one">
+            <span>Projects</span>
+            <strong>10+</strong>
+          </div>
+          <div class="glass-panel panel-two">
+            <span>Motion FPS</span>
+            <strong>60</strong>
+          </div>
+          <div class="glass-panel panel-three">
+            <span>Stack</span>
+            <strong>HTML • CSS • JS</strong>
+          </div>
+        </div>
+      </section>
+      <section class="marquee-strip" aria-label="Capabilities">
+        <div class="marquee-track">
+          <section class="marquee-strip" aria-label="Capabilities">
+            <div class="marquee-track">
+              <span>Frontend</span>
+              <span>UI/UX</span>
+              <span>React</span>
+              <span>Animations</span>
+              <span>Responsive </span>
+
+              <span>Frontend</span>
+              <span>UI/UX</span>
+              <span>React</span>
+              <span>Animations</span>
+              <span>Responsive</span>
+            </div>
+          </section>
+        </div>
+      </section>
+      <section class="content-section section-3d" id="work">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Selected Work</p>
+          <h2>
+            Modern websites and frontend projects crafted with creativity and
+            performance.
+          </h2>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card tilt-card reveal" data-depth="0.12">
+            <div class="project-media media-dashboard"></div>
+            <div class="card-content">
+              <span>Analytics Platform</span>
+              <h3>Portfolio Experience</h3>
+              <p>
+                Creative developer portfolio with 3D visuals, animations, and
+                glassmorphism effects.
+              </p>
+            </div>
+          </article>
+
+          <article class="project-card tilt-card reveal" data-depth="0.18">
+            <div class="project-media media-commerce"></div>
+
+            <div class="card-content">
+              <span>E-Commerce UI</span>
+
+              <h3>Modern Shopping Website</h3>
+
+              <p>
+                Responsive e-commerce interface with premium product cards,
+                hover animations, and smooth browsing experience.
+              </p>
+            </div>
+          </article>
+
+          <article class="project-card tilt-card reveal" data-depth="0.24">
+            <div class="project-media media-saas"></div>
+
+            <div class="card-content">
+              <span>UI Development</span>
+
+              <h3>Interactive Web Components</h3>
+
+              <p>
+                Creative frontend components with hover effects, glassmorphism,
+                responsive design, and interactive experiences.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section split-section section-3d" id="skills">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Skills</p>
+          <h2>
+            Frontend skills focused on modern UI, responsiveness, and smooth
+            interactions.
+          </h2>
+        </div>
+
+        <div class="skill-stage">
+          <div
+            class="skill-sphere parallax-card"
+            data-depth="0.16"
+            aria-hidden="true"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div class="skill-list">
+            <div class="skill-item reveal">
+              <strong>01</strong>
+              <div>
+                <h3>Responsive Web Design</h3>
+
+                <p>
+                  Creating modern responsive layouts that work smoothly across
+                  all devices.
+                </p>
+              </div>
+            </div>
+            <div class="skill-item reveal">
+              <strong>02</strong>
+              <div>
+                <h3>JavaScript Animations</h3>
+
+                <p>
+                  Building interactive UI with smooth animations, hover effects,
+                  and motion systems.
+                </p>
+              </div>
+            </div>
+            <div class="skill-item reveal">
+              <strong>03</strong>
+              <div>
+                <h3>React Development</h3>
+
+                <p>
+                  Developing reusable frontend components and modern web
+                  experiences using React.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section timeline-section section-3d" id="journey">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Education</p>
+          <h2>My process of creating modern web experiences.</h2>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-card reveal tilt-card">
+            <span>2022</span>
+            <h3>High School Education</h3>
+            <p>
+              Completed secondary education while developing interest in
+              technology, design, and creative digital experiences.
+            </p>
+          </div>
+
+          <div class="timeline-card reveal tilt-card">
+            <span>2023</span>
+            <h3>Started Web Development</h3>
+            <p>
+              Began learning HTML, CSS, and JavaScript with focus on modern
+              frontend design and responsive websites.
+            </p>
+          </div>
+
+          <div class="timeline-card reveal tilt-card">
+            <span>2024</span>
+            <h3>Frontend Projects</h3>
+            <p>
+              Built portfolio websites, UI designs, animation-based projects,
+              and interactive web experiences.
+            </p>
+          </div>
+
+          <div class="timeline-card reveal tilt-card">
+            <span>2025</span>
+            <h3>Advanced Frontend Journey</h3>
+            <p>
+              Exploring React, 3D web experiences, smooth animations, and
+              premium modern UI development.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-section section-3d" id="contact">
+        <div class="contact-copy reveal">
+          <p class="eyebrow">Contact Panel</p>
+          <h2>Let’s build your next modern website.</h2>
+          <p>
+            Available for frontend websites, portfolios, landing pages, and
+            modern UI design projects.
+          </p>
+        </div>
+
+        <form class="contact-panel reveal tilt-card">
+          <label>
+            <span>Name</span>
+            <input type="text" name="name" placeholder="Your name" />
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" placeholder="you@example.com" />
+          </label>
+          <label>
+            <span>Project</span>
+            <textarea
+              name="message"
+              rows="4"
+              placeholder="Tell me about your idea"
+            ></textarea>
+          </label>
+          <button class="primary-btn magnetic" type="button">
+            Send Message
+          </button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-copy">
+          <p class="eyebrow">Stay Connected</p>
+          <h2>Let us keep the next idea in motion.</h2>
+        </div>
+
+        <div class="footer-bottom">
+          <div class="footer-brand">
+            <span class="brand-mark">D</span>
+            <div>
+              <strong>Divyashi Singh</strong>
+              <p>Frontend Developer & Creative UI Designer</p>
+            </div>
+          </div>
+
+          <div>
+            <div class="footer-social" aria-label="Social media links">
+              <a
+                class="social-link"
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noreferrer"
+                >Instagram</a
+              >
+              <a
+                class="social-link"
+                href="https://www.linkedin.com/"
+                target="_blank"
+                rel="noreferrer"
+                >LinkedIn</a
+              >
+              <a
+                class="social-link"
+                href="https://github.com/"
+                target="_blank"
+                rel="noreferrer"
+                >GitHub</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
